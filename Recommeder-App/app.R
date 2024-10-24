@@ -17,7 +17,7 @@ library(DT) # Ensure you load the DT package for data tables
 # Function to read transactions from a CSV file
 get.txn <- function(data.path, columns) {
   transactions.obj <- read.transactions(file = data.path, format = "single", sep = ",", cols = columns, 
-                                        rm.duplicates = FALSE, quote = "", skip = 0, encoding = "Unknown")
+                                        rm.duplicates = FALSE, header = TRUE, quote = "", skip = 0, encoding = "Unknown")
   return(transactions.obj)
 }
 
@@ -47,7 +47,7 @@ plot.graph <- function(cross.sell.rules) {
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-  columns <- c("order_id", "product_id")
+  columns <- c(1, 2)
   path <- 'data/data.csv' # path to the data file
   transactions.obj <- get.txn(path, columns) # Ensure this uses the defined path
   
